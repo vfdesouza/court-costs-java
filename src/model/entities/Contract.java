@@ -6,8 +6,7 @@ public class Contract {
 
     private int number;
     private Date dateContract;
-    private double valueVehicle;
-    private double debtsVehicle;
+    private double valueVehicle, debtsVehicle;
 
     private Client client;
     private Vehicle vehicle;

@@ -1,22 +1,22 @@
 package model.services;
 
-import model.entities.Contract;
-
 public class CostsService implements FinalCosts {
-
-    Contract contract;
-    FipeService fipeService;
 
     public static final double taxAttorney  = 600;
     public static final double dispatch = 250;
 
     @Override
     public String viabilityContract(double valueVehicle, double debts) {
-        return fipeService.viabilityContract(contract.getDebtsVehicle(), contract.getValueVehicle());
+        double viability = debts * 100 / valueVehicle;
+        if (viability > 15) {
+            return "INVIÁVEL!";
+        } else {
+            return "VIÁVEL!";
+        }
     }
 
-    public double finalCosts() {
-        return contract.getValueVehicle() + contract.getDebtsVehicle() + taxAttorney + dispatch;
+    public double finalCosts(double valueVehicle, double debtsVehicle) {
+        return valueVehicle + debtsVehicle + taxAttorney + dispatch;
     }
 }
 
