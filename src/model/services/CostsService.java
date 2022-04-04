@@ -1,22 +1,15 @@
 package model.services;
 
-public class CostsService implements FinalCosts {
+public class CostsService {
 
-    public static final double taxAttorney  = 600;
-    public static final double dispatch = 250;
+    private FinalCosts finalCosts;
 
-    @Override
-    public String viabilityContract(double valueVehicle, double debts) {
-        double viability = debts * 100 / valueVehicle;
-        if (viability > 15) {
-            return "INVIÁVEL!";
-        } else {
-            return "VIÁVEL!";
-        }
+    public CostsService(FinalCosts finalCosts) {
+        this.finalCosts = finalCosts;
     }
 
-    public double finalCosts(double valueVehicle, double debtsVehicle) {
-        return valueVehicle + debtsVehicle + taxAttorney + dispatch;
+    public double federalTax(SP_Costs sp_costs) {
+        return sp_costs.valueTotalCosts() * 0.02;
     }
 }
 

@@ -3,6 +3,7 @@ package application;
 import model.entities.*;
 import model.services.CostsService;
 import model.services.FipeService;
+import model.services.SP_Costs;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -80,13 +81,14 @@ public class Program {
         System.out.print("Today's date (dd/MM/yyyy): ");
         Date consultationDate = sdf.parse(sc.next());
 
-        CostsService costsService = new CostsService();
+        CostsService costsService = new CostsService(new SP_Costs());
         FipeService fipeService = new FipeService();
+        SP_Costs sp_costs = new SP_Costs();
 
         Date validateQuery = fipeService.validateQuery(consultationDate);
 
-        String viabilityContract = costsService.viabilityContract(valueVehicle, debtsVehicle);
-        double finalCosts = costsService.finalCosts(valueVehicle, debtsVehicle);
+        String viabilityContract = sp_costs.viabilityContract(valueVehicle, debtsVehicle);
+        double finalCosts = sp_costs.valueTotalCosts() + costsService.federalTax(sp_costs);
 
         System.out.println(viabilityContract);
         System.out.println(finalCosts);
