@@ -45,7 +45,7 @@ public class Program {
         }
 
         String automaker, model, color, plate, modelYearOfManufacture;
-        double marketValue;
+        double valueFipeVehicle, debtsVehicle;
 
         System.out.println("Provide vehicle data");
         System.out.print("Automaker: ");
@@ -58,38 +58,39 @@ public class Program {
         plate = sc.next();
         System.out.print("Year of manufacture and model: ");
         modelYearOfManufacture = sc.next();
-        System.out.print("Market value: ");
-        marketValue = sc.nextDouble();
+        System.out.print("Fipe value: ");
+        valueFipeVehicle = sc.nextDouble();
+        System.out.print("Debts vehicle: ");
+        debtsVehicle = sc.nextDouble();
 
-        Vehicle vehicle = new Vehicle(automaker, model, color, plate, modelYearOfManufacture, marketValue);
+        Vehicle vehicle = new Vehicle(automaker, model, color, plate, modelYearOfManufacture, valueFipeVehicle);
 
         int number;
         Date dateContract;
-        double valueVehicle, debtsVehicle;
+        double valueContract;
 
         System.out.print("Contract number: ");
         number = sc.nextInt();
         System.out.print("Contract date (dd/MM/yyyy): ");
         dateContract = sdf.parse(sc.next());
-        System.out.print("Vehicle value: ");
-        valueVehicle = sc.nextDouble();
-        System.out.print("Vehicle debts: ");
-        debtsVehicle = sc.nextDouble();
+        System.out.print("Contract value: ");
+        valueContract = sc.nextDouble();
 
-        Contract contract = new Contract(number, dateContract, valueVehicle, debtsVehicle,client, vehicle);
+        Contract contract = new Contract(number, dateContract, valueContract,client, vehicle);
 
         System.out.print("Today's date (dd/MM/yyyy): ");
         Date consultationDate = sdf.parse(sc.next());
+
 
         CostsService costsService = new CostsService(new SP_Costs());
         FipeService fipeService = new FipeService();
         SP_Costs sp_costs = new SP_Costs();
 
-        Date validateQuery = fipeService.validateQuery(consultationDate);
+        String validateQuery = fipeService.validateQuery(consultationDate);
+        String viabilityContract = sp_costs.viabilityContract(valueFipeVehicle, debtsVehicle);
 
-        String viabilityContract = sp_costs.viabilityContract(valueVehicle, debtsVehicle);
         double finalCosts = sp_costs.valueTotalCosts() + costsService.federalTax(sp_costs);
-
+        
         System.out.println(viabilityContract);
         System.out.println(finalCosts);
         System.out.println(validateQuery);

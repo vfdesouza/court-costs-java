@@ -6,7 +6,7 @@ public class Contract {
 
     private int number;
     private Date dateContract;
-    private double valueVehicle, debtsVehicle;
+    private double valueContract;
 
     private Client client;
     private Vehicle vehicle;
@@ -14,11 +14,10 @@ public class Contract {
     public Contract() {
     }
 
-    public Contract(int number, Date dateContract, double valueVehicle, double debtsVehicle, Client client, Vehicle vehicle) {
+    public Contract(int number, Date dateContract, double valueContract, Client client, Vehicle vehicle) {
         this.number = number;
         this.dateContract = dateContract;
-        this.valueVehicle = valueVehicle;
-        this.debtsVehicle = debtsVehicle;
+        this.valueContract = valueContract;
         this.client = client;
         this.vehicle = vehicle;
     }
@@ -39,20 +38,12 @@ public class Contract {
         this.dateContract = dateContract;
     }
 
-    public double getValueVehicle() {
-        return valueVehicle;
+    public double getValueContract() {
+        return valueContract;
     }
 
-    public void setValueVehicle(double valueVehicle) {
-        this.valueVehicle = valueVehicle;
-    }
-
-    public double getDebtsVehicle() {
-        return debtsVehicle;
-    }
-
-    public void setDebtsVehicle(double debtsVehicle) {
-        this.debtsVehicle = debtsVehicle;
+    public void setValueContract(double valueContract) {
+        this.valueContract = valueContract;
     }
 
     public Client getClient() {

@@ -6,8 +6,8 @@ public class SP_Costs implements FinalCosts {
     private static double dispatch = 250;
 
     @Override
-    public String viabilityContract(double valueVehicle, double debts) {
-        double viability = debts * 100 / valueVehicle;
+    public String viabilityContract(double valueFipeVehicle, double debts) {
+        double viability = debts * 100 / valueFipeVehicle;
         if (viability > 15) {
             return "INVIÁVEL!";
         } else {
