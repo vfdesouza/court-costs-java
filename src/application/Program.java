@@ -1,7 +1,7 @@
 package application;
 
 import model.entities.*;
-import model.services.CostsService;
+import model.services.CostService;
 import model.services.FipeService;
 import model.services.SP_Costs;
 
@@ -82,17 +82,15 @@ public class Program {
         Date consultationDate = sdf.parse(sc.next());
 
 
-        CostsService costsService = new CostsService(new SP_Costs());
+        CostService costsService = new SP_Costs();
         FipeService fipeService = new FipeService();
-        SP_Costs sp_costs = new SP_Costs();
 
         String validateQuery = fipeService.validateQuery(consultationDate);
-        String viabilityContract = sp_costs.viabilityContract(valueFipeVehicle, debtsVehicle);
+        String viabilityContract = costsService.viabilityContract(valueFipeVehicle, debtsVehicle);
 
-        double finalCosts = sp_costs.valueTotalCosts() + costsService.federalTax(sp_costs);
-        
         System.out.println(viabilityContract);
-        System.out.println(finalCosts);
+        System.out.println(costsService.sumTax());
+        System.out.println(costsService.taxFederal());
         System.out.println(validateQuery);
 
     }

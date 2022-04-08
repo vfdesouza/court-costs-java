@@ -1,19 +1,23 @@
 package model.services;
 
-public class ES_Costs {
+public class ES_Costs implements CostService {
 
     private static double taxAttorney = 600;
     private static double dispatch = 300;
 
-    public static double getTaxAttorney() {
+    @Override
+    public double getTaxAttorney() {
         return taxAttorney;
     }
 
-    public static double getDispatch() {
+    @Override
+    public double getDispatch() {
         return dispatch;
     }
 
-    public double valueTotalCosts(double amount) {
+    public double sumTax() {
         return taxAttorney + dispatch;
     }
 }
+
+
